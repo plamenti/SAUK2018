@@ -1,0 +1,1 @@
+## Here should be provided recorded with Katalon automation tests! ##
