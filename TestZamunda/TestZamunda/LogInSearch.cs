@@ -1,6 +1,4 @@
 using System;
-using System.Text;
-using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -14,7 +12,6 @@ namespace TestZamunda
     public class LogInSearch
     {
         private static IWebDriver driver;
-        private StringBuilder verificationErrors;
         private HomePage homePage;
 
         
@@ -24,8 +21,20 @@ namespace TestZamunda
             //driver = new FirefoxDriver();
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-            verificationErrors = new StringBuilder();
             homePage = new HomePage(driver);
+
+            /*
+             !!! This is only for demo purposes !!!
+
+             An implicit wait is to tell WebDriver to poll the DOM
+             for a certain amount of time when trying to find
+             an element or elements if they are not immediately available.
+             The default setting is 0. Once set,
+             the implicit wait is set for the life of the WebDriver object instance.
+
+             !!! Better approach is to use explicit wait for every one single element !!!
+             */
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
         }
         
         [TestCleanup]
@@ -33,7 +42,6 @@ namespace TestZamunda
         {
             try
             {
-                //driver.Quit();// quit does not close the window
                 driver.Close();
                 driver.Dispose();
             }
@@ -41,8 +49,6 @@ namespace TestZamunda
             {
                 // Ignore errors if unable to close the browser
             }
-
-            Assert.AreEqual("", verificationErrors.ToString());
         }
         
         [TestMethod]

@@ -1,11 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace TestZamunda.Pages
 {
@@ -18,7 +14,7 @@ namespace TestZamunda.Pages
         {
             this.driver = driver;
         }
-
+        
         public IWebDriver Driver
         {
             get
@@ -112,7 +108,7 @@ namespace TestZamunda.Pages
         {
             get
             {
-                return driver.FindElement(By.Name("c28"));
+                return driver.FindElement(By.XPath("//a[contains(@style, '!important;') and text() = 'Movies/Russia']/preceding-sibling::input[1]"));
             }
         }
 
@@ -138,8 +134,6 @@ namespace TestZamunda.Pages
             Password.SendKeys(GetConfigProperty("password"));
 
             LoginButton.Submit();
-
-            Thread.Sleep(1000);
         }
 
         public void Filter()
