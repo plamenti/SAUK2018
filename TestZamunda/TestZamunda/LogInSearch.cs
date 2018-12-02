@@ -48,12 +48,16 @@ namespace TestZamunda
         [TestMethod]
         public void TheLogInSearchTest()
         {
+            // Arrange
             homePage.Navigate();
             homePage.Login();
+
+            // Act
             homePage.Filter();
             homePage.Search();
 
             // Assert
+            Assert.IsTrue(homePage.IsResutFound(), "The result is not found");
         }
     }
 }
